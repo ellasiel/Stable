@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">shultestable</string>
+    <string name="hello_blank_fragment">clean blank</string>
+    <string name="memory_menu">memory_menu</string>
+    <string name="speed_menu">speed_menu</string>
+    <string name="statistic_menu">statistic_menu</string>
+    <string name="delete">delete</string>
 </resources>
