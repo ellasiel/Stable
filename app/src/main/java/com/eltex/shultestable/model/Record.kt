@@ -7,14 +7,8 @@ import kotlinx.serialization.Serializable
 data class Record(
     @SerialName("id")
     var id: Long = 0L,
-    @SerialName("numberTime")
-    var numberTime: String = "",
-    @SerialName("mode")
-    val mode: String = "",
     @SerialName("level")
     val level: String = "",
     @SerialName("time")
     val time: String = "",
-    @SerialName("mistakes")
-    val mistakes: String = "",
 )

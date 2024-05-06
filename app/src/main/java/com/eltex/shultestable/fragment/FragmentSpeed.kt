@@ -8,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.eltex.shultestable.MainActivity
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentSpeedBinding
 import com.eltex.shultestable.model.Record
-import com.eltex.shultestable.viewmodel.SpeedViewModel
 
 class FragmentSpeed : Fragment() {
     private lateinit var binding: FragmentSpeedBinding
@@ -26,7 +24,6 @@ class FragmentSpeed : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupButtons()
         onBackPressed()
     }
@@ -74,7 +71,7 @@ class FragmentSpeed : Fragment() {
     private fun exit() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Exit")
-        builder.setMessage("Do you want leave the game?")
+        builder.setMessage("Do you want to leave the game?")
         builder.setNegativeButton("No") { dialog, i ->
 
         }

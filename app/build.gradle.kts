@@ -64,6 +64,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$roomVersion")
     val lifecycleVersion = "2.6.2"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     val navigationVersion = "2.7.6"

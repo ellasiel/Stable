@@ -10,9 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface RecordDao {
     @Query("SELECT * FROM Records ORDER BY id DESC")
     fun getAll(): Flow<List<RecordEntity>>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(record: RecordEntity)
-    @Query("DELETE FROM Records WHERE id = :id ")
-    fun deleteById(id: Long)
+    @Upsert
+    fun insert(event: RecordEntity): Long
 
 }

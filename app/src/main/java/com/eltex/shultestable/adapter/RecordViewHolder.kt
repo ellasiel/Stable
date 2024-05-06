@@ -11,11 +11,8 @@ class RecordViewHolder(
 
     fun bind(record: Record) {
         binding.numberTrain.text = "2"
-        binding.numberTime.text = record.numberTime
-        binding.mode.text = record.mode
         binding.level.text = record.level
         binding.time.text = record.time
-        binding.mistakes.text = record.mistakes
     }
 
 }

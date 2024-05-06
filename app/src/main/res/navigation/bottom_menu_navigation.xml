@@ -14,7 +14,7 @@
         android:label="fragmentSpeed" >
         <action
             android:id="@+id/goToGame"
-            app:destination="@id/gameFragment"
+            app:destination="@id/fragmentSpeedGame"
             app:popUpTo="@id/fragmentSpeed" />
     </fragment>
     <fragment
@@ -23,9 +23,9 @@
         android:label="FragmentUsers" />
 
     <fragment
-        android:id="@+id/gameFragment"
+        android:id="@+id/fragmentSpeedGame"
         android:name="com.eltex.shultestable.fragment.FragmentSpeedGame"
-        android:label="fragment_game"
+        android:label="fragmentSpeedGame"
         tools:layout="@layout/fragment_speed_game" >
         <argument
             android:name="level"

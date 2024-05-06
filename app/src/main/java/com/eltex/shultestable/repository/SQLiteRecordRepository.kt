@@ -11,10 +11,9 @@ class SQLiteRecordRepository(private val dao: RecordDao) : RecordRepository {
             it.map(RecordEntity::toRecord)
         }
 
-    override fun deleteById(id: Long) {
-        dao.deleteById(id)
-    }
     override fun insert(record: Record) {
-        TODO("Not yet implemented")
+        val recordEntity = RecordEntity.fromRecord(record)
+        dao.insert(recordEntity)
     }
+
 }
