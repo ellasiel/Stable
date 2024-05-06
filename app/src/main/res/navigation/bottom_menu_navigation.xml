@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_menu_navigation"
-    app:startDestination="@id/fragmentStatistic">
+    app:startDestination="@id/fragmentSpeed">
     <fragment
         android:id="@+id/fragmentStatistic"
         android:name="com.eltex.shultestable.fragment.FragmentStatistic"
@@ -10,9 +11,27 @@
     <fragment
         android:id="@+id/fragmentSpeed"
         android:name="com.eltex.shultestable.fragment.FragmentSpeed"
-        android:label="FragmentPosts" />
+        android:label="fragmentSpeed" >
+        <action
+            android:id="@+id/goToGame"
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/fragmentSpeed" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentMemory"
         android:name="com.eltex.shultestable.fragment.FragmentMemory"
         android:label="FragmentUsers" />
+
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.eltex.shultestable.fragment.FragmentSpeedGame"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_speed_game" >
+        <argument
+            android:name="level"
+            app:argType="string" />
+        <action
+            android:id="@+id/gameToHome"
+            app:destination="@id/fragmentSpeed" />
+    </fragment>
 </navigation>

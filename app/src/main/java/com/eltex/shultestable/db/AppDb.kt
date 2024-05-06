@@ -12,8 +12,10 @@ import com.eltex.shultestable.entity.RecordEntity
 )
 abstract class AppDb : RoomDatabase() {
     abstract val recordDao: RecordDao
+
     // companion object всегда 1 в приложении
     companion object {
+        const val DB_NAME = "Records"
         // Глобальная переменная в 1 экземпляре
         @Volatile
         private var INSTANCE: AppDb? = null

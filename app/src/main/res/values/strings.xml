@@ -5,4 +5,10 @@
     <string name="speed_menu">speed_menu</string>
     <string name="statistic_menu">statistic_menu</string>
     <string name="delete">delete</string>
+    <string name="easy">easy</string>
+    <string name="normal">normal</string>
+    <string name="hard">hard</string>
+    <string name="exit">exit</string>
+    <string name="ok">OK</string>
+    <string name="number_to_find">number_to_find</string>
 </resources>
