@@ -56,30 +56,30 @@ class FragmentSpeedGame : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.currentNumber.observe(viewLifecycleOwner) { currentNumber ->
-            binding.currentNumber.text = currentNumber.toString()
+        viewModel.actualNumber.observe(viewLifecycleOwner) { actualNumber ->
+            binding.actualNumber.text = actualNumber.toString()
         }
     }
 
     private fun setupGameLevel(level: String) {
         when (level) {
             "easy" -> setupGameTable(3, 3)
-            "hard" -> setupGameTable(4, 4)
-            "expert" -> setupGameTable(5, 5)
+            "normal" -> setupGameTable(4, 4)
+            "hard" -> setupGameTable(5, 5)
         }
     }
 
     private fun setupButtons() {
-        binding.backBtn.setOnClickListener {
+        binding.backButton.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.endBtn.setOnClickListener {
-            findNavController().navigate(FragmentSpeedGameDirections.gameToHome())
+        binding.endButton.setOnClickListener {
+            findNavController().navigate(FragmentSpeedGameDirections.speedGameToSpeed())
         }
     }
 
     private fun setupGameTable(gameColumns: Int, gameRows: Int) {
-        binding.gameTable.apply {
+        binding.speedgameTable.apply {
             columnCount = gameColumns
             rowCount = gameRows
         }
@@ -89,14 +89,14 @@ class FragmentSpeedGame : Fragment() {
             for (j in 0 until gameColumns) {
                 val randomNumber = allNumbers.random()
                 val numberTv = createTextView(randomNumber)
-                binding.gameTable.addView(
+                binding.speedgameTable.addView(
                     numberTv,
                     GridLayout.LayoutParams(GridLayout.spec(i, 1f), GridLayout.spec(j, 1f))
                 )
                 allNumbers.remove(randomNumber)
                 numberTv.setOnClickListener {
-                    val currentNumber = binding.currentNumber.text.toString().toInt()
-                    if (randomNumber == gameColumns * gameRows && randomNumber == currentNumber) {
+                    val actualNumber = binding.actualNumber.text.toString().toInt()
+                    if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
                         binding.resultTime.stop()
                        viewModel.saveResultTime(
                             Record(
@@ -115,9 +115,9 @@ class FragmentSpeedGame : Fragment() {
     }
 
     private fun showEndGame() {
-        binding.endBtn.isVisible = true
-        binding.victoryTv.isVisible = true
-        binding.victoryTv.text = binding.resultTime.text
+        binding.endButton.isVisible = true
+        binding.resultView.isVisible = true
+        binding.resultView.text = binding.resultTime.text
     }
 
     private fun createTextView(number: Int): TextView {

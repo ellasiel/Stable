@@ -9,13 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SpeedGameViewModel(private val recordRepository: RecordRepository) : ViewModel() {
-    val currentNumber = MutableLiveData<Int>()
+    val actualNumber = MutableLiveData<Int>()
 
     fun checkNumber(number: Int, maxNumber: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            currentNumber.value?.let { currentValue ->
+            actualNumber.value?.let { currentValue ->
                 if (number == currentValue && (number + 1) <= maxNumber) {
-                    currentNumber.postValue(number + 1)
+                    actualNumber.postValue(number + 1)
                 }
             }
         }
@@ -23,7 +23,7 @@ class SpeedGameViewModel(private val recordRepository: RecordRepository) : ViewM
 
     fun startGame() {
         viewModelScope.launch(Dispatchers.IO) {
-            currentNumber.postValue(1)
+            actualNumber.postValue(1)
         }
     }
 

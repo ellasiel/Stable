@@ -7,12 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.eltex.shultestable.MainActivity
-import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentSpeedBinding
-import com.eltex.shultestable.model.Record
 
 class FragmentSpeed : Fragment() {
     private lateinit var binding: FragmentSpeedBinding
@@ -29,33 +26,17 @@ class FragmentSpeed : Fragment() {
     }
 
     private fun setupButtons() {
-        binding.easyBtn.setOnClickListener {
-            findNavController().navigate(FragmentSpeedDirections.goToGame("easy"))
+        binding.easyButton.setOnClickListener {
+            findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("easy"))
         }
-        binding.hardBtn.setOnClickListener {
-            findNavController().navigate(FragmentSpeedDirections.goToGame("hard"))
+        binding.normalButton.setOnClickListener {
+            findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("normal"))
         }
-        binding.expertBtn.setOnClickListener {
-            findNavController().navigate(FragmentSpeedDirections.goToGame("expert"))
+        binding.hardButton.setOnClickListener {
+            findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("hard"))
         }
-        binding.exitBtn.setOnClickListener {
+        binding.exitButton.setOnClickListener {
             exit()
-        }
-    }
-
-
-    private fun unlockLevels(records: List<Record>) {
-        for (element in records) {
-            when (element.level) {
-                "easy" -> {
-                    binding.hardBtn.isClickable = true
-                    binding.hardBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                }
-                "hard" -> {
-                    binding.expertBtn.isClickable = true
-                    binding.expertBtn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary))
-                }
-            }
         }
     }
 

@@ -26,20 +26,20 @@ class BottomMenuFragment : Fragment() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.fragmentStatistic -> {
-                    binding.addEvent.setOnClickListener(statisticClickListener)
-                    binding.addEvent.animate()
+                    binding.saveResults.setOnClickListener(statisticClickListener)
+                    binding.saveResults.animate()
                         .scaleX(1F)
                         .scaleY(1F)
                 }
                 R.id.fragmentSpeed -> {
-                    binding.addEvent.setOnClickListener(speedClickListener)
-                    binding.addEvent.animate()
+                    binding.saveResults.setOnClickListener(speedClickListener)
+                    binding.saveResults.animate()
                         .scaleX(1F)
                         .scaleY(1F)
                 }
                 R.id.fragmentMemory -> {
-                    binding.addEvent.setOnClickListener(memoryClickListener)
-                    binding.addEvent.animate()
+                    binding.saveResults.setOnClickListener(memoryClickListener)
+                    binding.saveResults.animate()
                         .scaleX(0F)
                         .scaleY(0F)
                 }

@@ -7,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentToolbarBinding
 import com.eltex.shultestable.viewmodel.ToolbarViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class ToolbarFragment : Fragment() {
     override fun onAttach(context: Context) {

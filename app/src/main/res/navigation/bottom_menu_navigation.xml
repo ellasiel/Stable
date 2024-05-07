@@ -7,13 +7,13 @@
     <fragment
         android:id="@+id/fragmentStatistic"
         android:name="com.eltex.shultestable.fragment.FragmentStatistic"
-        android:label="FragmentEvents" />
+        android:label="FragmentStatistic" />
     <fragment
         android:id="@+id/fragmentSpeed"
         android:name="com.eltex.shultestable.fragment.FragmentSpeed"
         android:label="fragmentSpeed" >
         <action
-            android:id="@+id/goToGame"
+            android:id="@+id/goToSpeedGame"
             app:destination="@id/fragmentSpeedGame"
             app:popUpTo="@id/fragmentSpeed" />
     </fragment>
@@ -31,7 +31,7 @@
             android:name="level"
             app:argType="string" />
         <action
-            android:id="@+id/gameToHome"
+            android:id="@+id/speedGameToSpeed"
             app:destination="@id/fragmentSpeed" />
     </fragment>
 </navigation>

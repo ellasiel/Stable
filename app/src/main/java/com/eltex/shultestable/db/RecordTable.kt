@@ -6,5 +6,5 @@ object RecordTable {
     const val LEVEL = "level"
     const val TIME = "time"
     val allColumns =
-        arrayOf(LEVEL, TIME)
+        arrayOf(ID, LEVEL, TIME)
 }
