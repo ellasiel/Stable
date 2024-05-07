@@ -21,6 +21,7 @@ import com.eltex.shultestable.databinding.FragmentSpeedGameBinding
 import com.eltex.shultestable.db.AppDb
 import com.eltex.shultestable.model.Record
 import com.eltex.shultestable.repository.SQLiteRecordRepository
+import com.eltex.shultestable.utils.DateTimeUtils
 import com.eltex.shultestable.viewmodel.SpeedGameViewModel
 
 class FragmentSpeedGame : Fragment() {
@@ -37,6 +38,9 @@ class FragmentSpeedGame : Fragment() {
             }
         }
     }
+
+    private var newRecordId: Long = 0L
+    private lateinit var numberTime: String
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +53,8 @@ class FragmentSpeedGame : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        newRecordId = viewModel.getLastRecordId() + 1L
+        numberTime = DateTimeUtils.getCurrentDateTime()
         setupGameLevel(args.level)
         setupButtons()
         setupObservers()
@@ -58,6 +64,11 @@ class FragmentSpeedGame : Fragment() {
     private fun setupObservers() {
         viewModel.actualNumber.observe(viewLifecycleOwner) { actualNumber ->
             binding.actualNumber.text = actualNumber.toString()
+        }
+
+        viewModel.mistakesCount.observe(viewLifecycleOwner) { count ->
+            // Обновляем отображение количества ошибок
+            binding.mistakesCount.text = count.toString()
         }
     }
 
@@ -98,11 +109,14 @@ class FragmentSpeedGame : Fragment() {
                     val actualNumber = binding.actualNumber.text.toString().toInt()
                     if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
                         binding.resultTime.stop()
-                       viewModel.saveResultTime(
+                        viewModel.saveResultTime(
                             Record(
-                                id = 2,
+                                newRecordId,
+                                numberTime,
+                                mode = "speed",
                                 args.level,
-                                (SystemClock.elapsedRealtime() - binding.resultTime.base).toString()
+                                ((SystemClock.elapsedRealtime() - binding.resultTime.base)/1000.0).toString(),
+                                mistakes = binding.mistakesCount.text.toString()
                             )
                         )
                         showEndGame()

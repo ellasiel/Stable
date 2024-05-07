@@ -43,6 +43,7 @@ class FragmentStatistic : Fragment() {
             object : RecordsAdapter.EventListener {
 
                 override fun onDeleteClicked(record: Record) {
+                    viewModel.deleteById(record.id)
                 }
             }
         )

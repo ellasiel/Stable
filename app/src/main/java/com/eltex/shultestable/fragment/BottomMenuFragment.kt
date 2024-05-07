@@ -34,8 +34,8 @@ class BottomMenuFragment : Fragment() {
                 R.id.fragmentSpeed -> {
                     binding.saveResults.setOnClickListener(speedClickListener)
                     binding.saveResults.animate()
-                        .scaleX(1F)
-                        .scaleY(1F)
+                        .scaleX(0F)
+                        .scaleY(0F)
                 }
                 R.id.fragmentMemory -> {
                     binding.saveResults.setOnClickListener(memoryClickListener)

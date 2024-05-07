@@ -29,13 +29,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/mistakes_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Mistakes: 0"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result_time" />
+
+    <TextView
         android:id="@+id/actual_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/back_button"
+        app:layout_constraintStart_toEndOf="@id/mistakes_count"
         app:layout_constraintTop_toBottomOf="@id/result_time"
         tools:text="10" />
 
@@ -43,6 +57,7 @@
         android:id="@+id/find_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/number_to_find"
         app:layout_constraintEnd_toEndOf="@id/actual_number"
         app:layout_constraintStart_toStartOf="@id/actual_number"
@@ -54,32 +69,32 @@
         android:layout_height="0dp"
         android:layout_margin="20dp"
         android:useDefaultMargins="true"
-        app:layout_constraintTop_toBottomOf="@id/find_number"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/find_number" />
 
     <TextView
         android:id="@+id/result_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/primary"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="50sp"
-        android:textColor="@color/white"
-        android:background="@color/primary"
-        android:visibility="gone"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/end_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/ok"
-        app:layout_constraintTop_toBottomOf="@id/result_view"
-        app:layout_constraintStart_toStartOf="@id/result_view"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/result_view"
-        android:visibility="gone"/>
+        app:layout_constraintStart_toStartOf="@id/result_view"
+        app:layout_constraintTop_toBottomOf="@id/result_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

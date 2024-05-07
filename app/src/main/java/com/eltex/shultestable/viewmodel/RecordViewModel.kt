@@ -21,4 +21,7 @@ class RecordViewModel(private val repository: RecordRepository) : ViewModel() {
             }
             .launchIn(viewModelScope)
     }
+    fun deleteById(id: Long) {
+        repository.deleteById(id)
+    }
 }

@@ -15,5 +15,10 @@ class SQLiteRecordRepository(private val dao: RecordDao) : RecordRepository {
         val recordEntity = RecordEntity.fromRecord(record)
         dao.insert(recordEntity)
     }
-
+    override fun getLastRecord(): Record? {
+        return dao.getLastRecord()?.toRecord()
+    }
+    override fun deleteById(id: Long) {
+        dao.deleteById(id)
+    }
 }

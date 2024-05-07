@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface RecordRepository {
     fun getRecords(): Flow<List<Record>>
     fun insert(record: Record)
+    fun getLastRecord(): Record?
+    fun deleteById(id: Long)
 }

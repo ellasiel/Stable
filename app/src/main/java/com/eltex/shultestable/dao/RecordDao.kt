@@ -1,7 +1,5 @@
 package com.eltex.shultestable.dao
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
 import com.eltex.shultestable.entity.RecordEntity
@@ -12,5 +10,8 @@ interface RecordDao {
     fun getAll(): Flow<List<RecordEntity>>
     @Upsert
     fun insert(event: RecordEntity): Long
-
+    @Query("SELECT * FROM Records ORDER BY id DESC LIMIT 1")
+    fun getLastRecord(): RecordEntity?
+    @Query("DELETE FROM Records WHERE id = :id ")
+    fun deleteById(id: Long)
 }
