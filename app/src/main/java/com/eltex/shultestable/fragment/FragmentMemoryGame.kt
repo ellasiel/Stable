@@ -85,6 +85,7 @@ class FragmentMemoryGame : Fragment() {
     private fun enableClickAndStartTimerAfterDelay(delayMillis: Long) {
         view?.postDelayed({
             isClickable = true
+            binding.resultTime.base = SystemClock.elapsedRealtime()
             binding.resultTime.start() // Запуск таймера
         }, delayMillis)
     }

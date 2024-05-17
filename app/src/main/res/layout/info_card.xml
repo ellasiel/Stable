@@ -36,7 +36,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="?colorOnSurface"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@id/menu"
             app:layout_constraintStart_toEndOf="@id/numberOval"
             app:layout_constraintTop_toTopOf="parent"
@@ -61,54 +61,52 @@
             android:id="@+id/mode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_margin="8dp"
             android:letterSpacing="0.05"
             android:textColor="?colorOnSurfaceVariant"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/level"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/headerBarrier"
             tools:text="Speed" />
+
         <TextView
             android:id="@+id/level"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_margin="8dp"
             android:letterSpacing="0.025"
             android:textColor="?colorOnSurfaceVariant"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mode"
-            tools:text="normal" />
+            app:layout_constraintStart_toEndOf="@+id/mode"
+            app:layout_constraintTop_toBottomOf="@id/headerBarrier"
+            tools:text="Normal" />
+
         <TextView
             android:id="@+id/time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
+            android:layout_margin="8dp"
             android:letterSpacing="0.02"
             android:textColor="?colorOnSurfaceVariant"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/mistakes"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/level"
+            app:layout_constraintTop_toBottomOf="@+id/mode"
             tools:text="27s" />
+
         <TextView
             android:id="@+id/mistakes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:autoLink="all"
+            android:layout_margin="8dp"
             android:letterSpacing="0.025"
             android:textColor="?colorOnSurfaceVariant"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/time"
+            app:layout_constraintStart_toEndOf="@+id/time"
+            app:layout_constraintTop_toBottomOf="@+id/level"
             tools:text="7" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
