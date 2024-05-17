@@ -76,15 +76,16 @@ class FragmentMemoryGame : Fragment() {
         viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
             if (shouldHide) {
                 hideNumbers()
-                // Включаем кликабельность квадратиков через 5 секунд после исчезновения цифр
-                enableClickAfterDelay(0)
+                // Включаем кликабельность квадратиков и стартуем таймер через 5 секунд после исчезновения цифр
+                enableClickAndStartTimerAfterDelay(0)
             }
         }
     }
 
-    private fun enableClickAfterDelay(delayMillis: Long) {
+    private fun enableClickAndStartTimerAfterDelay(delayMillis: Long) {
         view?.postDelayed({
             isClickable = true
+            binding.resultTime.start() // Запуск таймера
         }, delayMillis)
     }
 
@@ -143,7 +144,6 @@ class FragmentMemoryGame : Fragment() {
                 }
             }
         }
-        binding.resultTime.start()
     }
 
     private fun showEndGame() {
