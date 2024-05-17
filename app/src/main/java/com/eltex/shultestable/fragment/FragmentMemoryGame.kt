@@ -70,6 +70,12 @@ class FragmentMemoryGame : Fragment() {
             // Обновляем отображение количества ошибок
             binding.mistakes2Count.text = count.toString()
         }
+
+        viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
+            if (shouldHide) {
+                hideNumbers()
+            }
+        }
     }
 
     private fun setupGameLevel(level: String) {
@@ -134,13 +140,12 @@ class FragmentMemoryGame : Fragment() {
         binding.resultView.text = binding.resultTime.text
     }
 
-    private fun createTextView(number: Int): TextView {
-        return TextView(requireContext()).apply {
-            text = number.toString()
-            setBackgroundResource(R.drawable.rectangle_background)
-            textSize = 24f
-            gravity = Gravity.CENTER
-            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+    private fun hideNumbers() {
+        for (i in 0 until binding.memoryGameTable.childCount) {
+            val child = binding.memoryGameTable.getChildAt(i)
+            if (child is TextView) {
+                child.text = ""
+            }
         }
     }
 
@@ -152,4 +157,19 @@ class FragmentMemoryGame : Fragment() {
         return result
     }
 
+    private fun createTextView(number: Int): TextView {
+        return TextView(requireContext()).apply {
+            text = number.toString()
+            setBackgroundResource(R.drawable.rectangle_background)
+            textSize = 24f
+            gravity = Gravity.CENTER
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+
+            viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
+                if (shouldHide) {
+                    text = ""
+                }
+            }
+        }
+    }
 }

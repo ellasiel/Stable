@@ -6,14 +6,17 @@ import androidx.lifecycle.viewModelScope
 import com.eltex.shultestable.model.Record
 import com.eltex.shultestable.repository.RecordRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MemoryGameViewModel(private val recordRepository: RecordRepository) : ViewModel() {
     val currentNumber = MutableLiveData<Int>()
     val mistakes2Count = MutableLiveData<Int>()
+    val shouldHideNumbers = MutableLiveData<Boolean>()
 
     init {
         mistakes2Count.value = 0
+        shouldHideNumbers.value = false
     }
 
     fun checkNumber(number: Int, maxNumber: Int) {
@@ -32,6 +35,9 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
     fun startGame() {
         viewModelScope.launch(Dispatchers.IO) {
             currentNumber.postValue(1)
+            shouldHideNumbers.postValue(false)
+            delay(5000) // Задержка в 5 секунд перед скрытием чисел
+            shouldHideNumbers.postValue(true)
         }
     }
 
