@@ -11,6 +11,7 @@ import android.widget.GridLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -23,10 +24,20 @@ import com.eltex.shultestable.model.Record
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.utils.DateTimeUtils
 import com.eltex.shultestable.viewmodel.SpeedGameViewModel
+import com.eltex.shultestable.viewmodel.ToolbarViewModel
 
 class FragmentSpeedGame : Fragment() {
     private lateinit var binding: FragmentSpeedGameBinding
     private val args: FragmentSpeedGameArgs by navArgs()
+    private val toolbarViewModel by activityViewModels<ToolbarViewModel>()
+    override fun onStart() {
+        super.onStart()
+        toolbarViewModel.setSaveVisibility(true)
+    }
+    override fun onStop() {
+        super.onStop()
+        toolbarViewModel.setSaveVisibility(false)
+    }
     private val viewModel by viewModels<SpeedGameViewModel> {
         viewModelFactory {
             initializer {
