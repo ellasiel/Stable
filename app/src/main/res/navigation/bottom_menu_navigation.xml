@@ -11,7 +11,7 @@
     <fragment
         android:id="@+id/fragmentSpeed"
         android:name="com.eltex.shultestable.fragment.FragmentSpeed"
-        android:label="fragmentSpeed" >
+        android:label="fragmentSpeed">
         <action
             android:id="@+id/goToSpeedGame"
             app:destination="@id/fragmentSpeedGame"
@@ -20,18 +20,34 @@
     <fragment
         android:id="@+id/fragmentMemory"
         android:name="com.eltex.shultestable.fragment.FragmentMemory"
-        android:label="FragmentUsers" />
-
+        android:label="fragmentMemory">
+    <action
+        android:id="@+id/goToMemoryGame"
+        app:destination="@id/fragmentMemoryGame"
+        app:popUpTo="@id/fragmentMemory" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentSpeedGame"
         android:name="com.eltex.shultestable.fragment.FragmentSpeedGame"
         android:label="fragmentSpeedGame"
-        tools:layout="@layout/fragment_speed_game" >
+        tools:layout="@layout/fragment_speed_game">
         <argument
             android:name="level"
             app:argType="string" />
         <action
             android:id="@+id/speedGameToSpeed"
             app:destination="@id/fragmentSpeed" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMemoryGame"
+        android:name="com.eltex.shultestable.fragment.FragmentMemoryGame"
+        android:label="fragmentMemoryGame"
+        tools:layout="@layout/fragment_memory_game">
+        <argument
+            android:name="level"
+            app:argType="string" />
+        <action
+            android:id="@+id/memoryGameToMemory"
+            app:destination="@id/fragmentMemory" />
     </fragment>
 </navigation>

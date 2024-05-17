@@ -17,20 +17,20 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eltex.shultestable.R
-import com.eltex.shultestable.databinding.FragmentSpeedGameBinding
+import com.eltex.shultestable.databinding.FragmentMemoryGameBinding
 import com.eltex.shultestable.db.AppDb
 import com.eltex.shultestable.model.Record
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.utils.DateTimeUtils
-import com.eltex.shultestable.viewmodel.SpeedGameViewModel
+import com.eltex.shultestable.viewmodel.MemoryGameViewModel
 
-class FragmentSpeedGame : Fragment() {
-    private lateinit var binding: FragmentSpeedGameBinding
-    private val args: FragmentSpeedGameArgs by navArgs()
-    private val viewModel by viewModels<SpeedGameViewModel> {
+class FragmentMemoryGame : Fragment() {
+    private lateinit var binding: FragmentMemoryGameBinding
+    private val args: FragmentMemoryGameArgs by navArgs()
+    private val viewModel by viewModels<MemoryGameViewModel> {
         viewModelFactory {
             initializer {
-                SpeedGameViewModel(
+                MemoryGameViewModel(
                     recordRepository = SQLiteRecordRepository(
                         AppDb.getInstance(requireContext().applicationContext).recordDao
                     )
@@ -46,7 +46,7 @@ class FragmentSpeedGame : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSpeedGameBinding.inflate(layoutInflater)
+        binding = FragmentMemoryGameBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -62,13 +62,13 @@ class FragmentSpeedGame : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.actualNumber.observe(viewLifecycleOwner) { actualNumber ->
-            binding.actualNumber.text = actualNumber.toString()
+        viewModel.currentNumber.observe(viewLifecycleOwner) { actualNumber ->
+            binding.currentNumber.text = actualNumber.toString()
         }
 
-        viewModel.mistakesCount.observe(viewLifecycleOwner) { count ->
+        viewModel.mistakes2Count.observe(viewLifecycleOwner) { count ->
             // Обновляем отображение количества ошибок
-            binding.mistakesCount.text = count.toString()
+            binding.mistakes2Count.text = count.toString()
         }
     }
 
@@ -85,12 +85,12 @@ class FragmentSpeedGame : Fragment() {
             findNavController().popBackStack()
         }
         binding.endButton.setOnClickListener {
-            findNavController().navigate(FragmentSpeedGameDirections.speedGameToSpeed())
+            findNavController().navigate(FragmentMemoryGameDirections.memoryGameToMemory())
         }
     }
 
     private fun setupGameTable(gameColumns: Int, gameRows: Int) {
-        binding.speedgameTable.apply {
+        binding.memoryGameTable.apply {
             columnCount = gameColumns
             rowCount = gameRows
         }
@@ -100,23 +100,23 @@ class FragmentSpeedGame : Fragment() {
             for (j in 0 until gameColumns) {
                 val randomNumber = allNumbers.random()
                 val numberTv = createTextView(randomNumber)
-                binding.speedgameTable.addView(
+                binding.memoryGameTable.addView(
                     numberTv,
                     GridLayout.LayoutParams(GridLayout.spec(i, 1f), GridLayout.spec(j, 1f))
                 )
                 allNumbers.remove(randomNumber)
                 numberTv.setOnClickListener {
-                    val actualNumber = binding.actualNumber.text.toString().toInt()
+                    val actualNumber = binding.currentNumber.text.toString().toInt()
                     if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
                         binding.resultTime.stop()
                         viewModel.saveResultTime(
                             Record(
                                 newRecordId,
                                 numberTime,
-                                mode = "speed",
+                                mode = "memory",
                                 args.level,
-                                ((SystemClock.elapsedRealtime() - binding.resultTime.base)/1000.0).toString(),
-                                mistakes = binding.mistakesCount.text.toString()
+                                ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
+                                mistakes = binding.mistakes2Count.text.toString()
                             )
                         )
                         showEndGame()
