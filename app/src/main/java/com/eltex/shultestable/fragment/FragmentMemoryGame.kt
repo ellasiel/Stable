@@ -41,6 +41,8 @@ class FragmentMemoryGame : Fragment() {
 
     private var newRecordId: Long = 0L
     private lateinit var numberTime: String
+    private var isClickable = false // Переменная для управления кликабельностью
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -74,8 +76,16 @@ class FragmentMemoryGame : Fragment() {
         viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
             if (shouldHide) {
                 hideNumbers()
+                // Включаем кликабельность квадратиков через 5 секунд после исчезновения цифр
+                enableClickAfterDelay(0)
             }
         }
+    }
+
+    private fun enableClickAfterDelay(delayMillis: Long) {
+        view?.postDelayed({
+            isClickable = true
+        }, delayMillis)
     }
 
     private fun setupGameLevel(level: String) {
@@ -112,22 +122,24 @@ class FragmentMemoryGame : Fragment() {
                 )
                 allNumbers.remove(randomNumber)
                 numberTv.setOnClickListener {
-                    val actualNumber = binding.currentNumber.text.toString().toInt()
-                    if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
-                        binding.resultTime.stop()
-                        viewModel.saveResultTime(
-                            Record(
-                                newRecordId,
-                                numberTime,
-                                mode = "memory",
-                                args.level,
-                                ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
-                                mistakes = binding.mistakes2Count.text.toString()
+                    if (isClickable) { // Проверяем, кликабелен ли квадратик
+                        val actualNumber = binding.currentNumber.text.toString().toInt()
+                        if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
+                            binding.resultTime.stop()
+                            viewModel.saveResultTime(
+                                Record(
+                                    newRecordId,
+                                    numberTime,
+                                    mode = "memory",
+                                    args.level,
+                                    ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
+                                    mistakes = binding.mistakes2Count.text.toString()
+                                )
                             )
-                        )
-                        showEndGame()
+                            showEndGame()
+                        }
+                        viewModel.checkNumber(randomNumber, gameColumns * gameRows)
                     }
-                    viewModel.checkNumber(randomNumber, gameColumns * gameRows)
                 }
             }
         }
