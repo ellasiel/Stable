@@ -1,11 +1,11 @@
 package com.eltex.shultestable.repository
 
-import com.eltex.shultestable.model.Record
+import com.eltex.shultestable.model.GameRecord
 import kotlinx.coroutines.flow.Flow
 
 interface RecordRepository {
-    fun getRecords(): Flow<List<Record>>
-    fun insert(record: Record)
-    fun getLastRecord(): Record?
+    fun getRecords(): Flow<List<GameRecord>>
+    fun insert(record: GameRecord)
+    fun getLastRecord(): GameRecord?
     fun deleteById(id: Long)
 }

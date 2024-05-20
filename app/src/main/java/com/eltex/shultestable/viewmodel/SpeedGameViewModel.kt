@@ -3,7 +3,7 @@ package com.eltex.shultestable.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eltex.shultestable.model.Record
+import com.eltex.shultestable.model.GameRecord
 import com.eltex.shultestable.repository.RecordRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class SpeedGameViewModel(private val recordRepository: RecordRepository) : ViewM
         }
     }
 
-    fun saveResultTime(model: Record) {
+    fun saveResultTime(model: GameRecord) {
         viewModelScope.launch(Dispatchers.IO) {
             recordRepository.insert(model)
         }

@@ -2,13 +2,13 @@ package com.eltex.shultestable.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import com.eltex.shultestable.databinding.InfoCardBinding
-import com.eltex.shultestable.model.Record
+import com.eltex.shultestable.model.GameRecord
 
 class RecordViewHolder(
     private val binding: InfoCardBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(record: Record) {
+    fun bind(record: GameRecord) {
         binding.numberTrain.text = record.id.toString()
         binding.numberTime.text = record.numberTime
         binding.mode.text = "mode:  " + record.mode

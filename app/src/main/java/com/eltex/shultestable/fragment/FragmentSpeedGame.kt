@@ -19,7 +19,7 @@ import androidx.navigation.fragment.navArgs
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentSpeedGameBinding
 import com.eltex.shultestable.db.AppDb
-import com.eltex.shultestable.model.Record
+import com.eltex.shultestable.model.GameRecord
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.utils.DateTimeUtils
 import com.eltex.shultestable.viewmodel.SpeedGameViewModel
@@ -110,12 +110,12 @@ class FragmentSpeedGame : Fragment() {
                     if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
                         binding.resultTime.stop()
                         viewModel.saveResultTime(
-                            Record(
+                            GameRecord(
                                 newRecordId,
                                 numberTime,
                                 mode = "speed",
-                                args.level,
-                                ((SystemClock.elapsedRealtime() - binding.resultTime.base)/1000.0).toString(),
+                                level = "easy", // Указываем имя параметра явно
+                                time = ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
                                 mistakes = binding.mistakesCount.text.toString()
                             )
                         )

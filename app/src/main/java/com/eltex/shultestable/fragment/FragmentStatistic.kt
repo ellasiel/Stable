@@ -15,7 +15,7 @@ import com.eltex.shultestable.adapter.RecordsAdapter
 import com.eltex.shultestable.databinding.FragmentStatisticBinding
 import com.eltex.shultestable.db.AppDb
 import com.eltex.shultestable.itemdecoration.OffsetDecoration
-import com.eltex.shultestable.model.Record
+import com.eltex.shultestable.model.GameRecord
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.viewmodel.RecordViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -42,7 +42,7 @@ class FragmentStatistic : Fragment() {
         val adapter = RecordsAdapter(
             object : RecordsAdapter.EventListener {
 
-                override fun onDeleteClicked(record: Record) {
+                override fun onDeleteClicked(record: GameRecord) {
                     viewModel.deleteById(record.id)
                 }
             }

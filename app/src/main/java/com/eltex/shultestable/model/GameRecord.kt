@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Record(
+data class GameRecord(
     @SerialName("id")
     var id: Long = 0L,
     @SerialName("numberTime")

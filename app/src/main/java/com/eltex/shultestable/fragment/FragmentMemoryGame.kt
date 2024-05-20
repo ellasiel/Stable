@@ -19,7 +19,7 @@ import androidx.navigation.fragment.navArgs
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentMemoryGameBinding
 import com.eltex.shultestable.db.AppDb
-import com.eltex.shultestable.model.Record
+import com.eltex.shultestable.model.GameRecord
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.utils.DateTimeUtils
 import com.eltex.shultestable.viewmodel.MemoryGameViewModel
@@ -129,7 +129,7 @@ class FragmentMemoryGame : Fragment() {
                         if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
                             binding.resultTime.stop()
                             viewModel.saveResultTime(
-                                Record(
+                                GameRecord(
                                     newRecordId,
                                     numberTime,
                                     mode = "memory",
