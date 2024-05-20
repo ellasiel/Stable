@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Таблицы Шульте</string>
+    <string name="hello_blank_fragment">чистое окно</string>
+    <string name="memory_menu">Запоминание</string>
+    <string name="speed_menu">Скорочтение</string>
+    <string name="statistic_menu">Статистика</string>
+    <string name="delete">Удалить</string>
+    <string name="easy">Легко</string>
+    <string name="normal">Нормально</string>
+    <string name="hard">Сложно</string>
+    <string name="exit">Выход</string>
+    <string name="ok">OK</string>
+    <string name="number_to_find">Искомое число</string>
+    <string name="count_mistakes">количество ошибок</string>
+    <string name="SpeedMode">Скорочтение</string>
+    <string name="MemoryMode">Тренировка памяти</string>
+</resources>
