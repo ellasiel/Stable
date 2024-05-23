@@ -70,5 +70,5 @@ dependencies {
     val navigationVersion = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
-    implementation ("com.opencsv:opencsv:5.9")
+    implementation("com.opencsv:opencsv:5.9")
 }

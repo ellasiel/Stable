@@ -8,4 +8,5 @@ interface RecordRepository {
     fun insert(record: GameRecord)
     fun getLastRecord(): GameRecord?
     fun deleteById(id: Long)
+    fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<GameRecord>>
 }

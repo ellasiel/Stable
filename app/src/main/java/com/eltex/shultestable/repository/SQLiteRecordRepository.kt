@@ -30,4 +30,7 @@ class SQLiteRecordRepository(private val dao: RecordDao) : RecordRepository {
     override fun deleteById(id: Long) {
         dao.deleteById(id)
     }
+    override fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<GameRecord>> {
+        return dao.getAllRecordsByModeAndLevel(mode, level)
+    }
 }

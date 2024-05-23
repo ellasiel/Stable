@@ -10,6 +10,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.fragment.findNavController
 import com.eltex.shultestable.R
 import com.eltex.shultestable.adapter.RecordsAdapter
 import com.eltex.shultestable.databinding.FragmentStatisticBinding
@@ -47,6 +48,9 @@ class FragmentStatistic : Fragment() {
                 }
             }
         )
+        binding.btnGraphs.setOnClickListener {
+            findNavController().navigate(FragmentStatisticDirections.goToGraphics())
+        }
         binding.list.adapter = adapter
         binding.list.addItemDecoration(
             OffsetDecoration(resources.getDimensionPixelSize(R.dimen.small_spacing))

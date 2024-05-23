@@ -7,7 +7,12 @@
     <fragment
         android:id="@+id/fragmentStatistic"
         android:name="com.eltex.shultestable.fragment.FragmentStatistic"
-        android:label="FragmentStatistic" />
+        android:label="FragmentStatistic" >
+    <action
+        android:id="@+id/goToGraphics"
+        app:destination="@id/fragmentGraphics"
+        app:popUpTo="@id/fragmentStatistic" />
+</fragment>
     <fragment
         android:id="@+id/fragmentSpeed"
         android:name="com.eltex.shultestable.fragment.FragmentSpeed"
@@ -49,5 +54,14 @@
         <action
             android:id="@+id/memoryGameToMemory"
             app:destination="@id/fragmentMemory" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentGraphics"
+        android:name="com.eltex.shultestable.fragment.FragmentGraphics"
+        android:label="fragmentGraphics"
+        tools:layout="@layout/fragment_graphics">
+        <action
+            android:id="@+id/GraphicsToStatistic"
+            app:destination="@id/fragmentStatistic" />
     </fragment>
 </navigation>
