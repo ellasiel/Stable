@@ -14,4 +14,9 @@
     <string name="count_mistakes">count_mistakes</string>
     <string name="SpeedMode">SpeedMode</string>
     <string name="MemoryMode">MemoryMode</string>
+    <string name="exitann">Do you want to leave the game?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="infoTitle">Information</string>
+    <string name="infoText">how to use this app</string>
 </resources>

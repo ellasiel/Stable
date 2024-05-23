@@ -35,9 +35,6 @@ class FragmentSpeed : Fragment() {
         binding.hardButton.setOnClickListener {
             findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("hard"))
         }
-        binding.exitButton.setOnClickListener {
-            exit()
-        }
     }
 
     private fun onBackPressed() {
@@ -49,16 +46,4 @@ class FragmentSpeed : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, callback)
     }
 
-    private fun exit() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Exit")
-        builder.setMessage("Do you want to leave the game?")
-        builder.setNegativeButton("No") { dialog, i ->
-
-        }
-        builder.setPositiveButton("Yes") { dialog, i ->
-            (requireActivity() as? MainActivity)?.finish()
-        }
-        builder.show()
-    }
 }
