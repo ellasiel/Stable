@@ -36,9 +36,9 @@ abstract class AppDb : RoomDatabase() {
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
-                context.deleteDatabase("app_db")
+                //context.deleteDatabase("app_db")
                 INSTANCE = appDb
-                populateInitialData(appDb) // Заполнение начальных данных при создании базы данных
+                populateInitialData(appDb)
                 return appDb
             }
         }

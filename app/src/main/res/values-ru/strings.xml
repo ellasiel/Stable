@@ -11,7 +11,7 @@
     <string name="hard">Сложно</string>
     <string name="exit">Выход</string>
     <string name="ok">OK</string>
-    <string name="number_to_find">Искомое число</string>
+    <string name="number_to_find">искомое число</string>
     <string name="count_mistakes">количество ошибок</string>
     <string name="SpeedMode">Скорочтение</string>
     <string name="MemoryMode">Тренировка памяти</string>
