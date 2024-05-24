@@ -114,7 +114,7 @@ class FragmentSpeedGame : Fragment() {
                                 newRecordId,
                                 numberTime,
                                 mode = "speed",
-                                level = "easy", // Указываем имя параметра явно
+                                args.level,
                                 time = ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
                                 mistakes = binding.mistakesCount.text.toString()
                             )

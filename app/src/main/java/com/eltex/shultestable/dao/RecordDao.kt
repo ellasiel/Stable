@@ -16,7 +16,7 @@ interface RecordDao {
     @Upsert
     fun insert(event: RecordEntity): Long
 
-    @Query("SELECT Records.*, Mode.name AS mode, Level.name AS level FROM Records INNER JOIN Mode ON Records.mode_id = Mode.id INNER JOIN Level ON Records.level_id = Level.id WHERE Mode.name = :mode AND Level.name = :level ORDER BY Records.id DESC")
+    @Query("SELECT Records.*, Mode.name AS mode, Level.name AS level FROM Records INNER JOIN Mode ON Records.mode_id = Mode.id INNER JOIN Level ON Records.level_id = Level.id WHERE Mode.name = :mode AND Level.name = :level ORDER BY Records.id DESC LIMIT 10")
     fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<GameRecord>>
 
     @Query("SELECT * FROM Records ORDER BY id DESC LIMIT 1")

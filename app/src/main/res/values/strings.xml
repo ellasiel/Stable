@@ -20,6 +20,7 @@
     <string name="infoTitle">Information</string>
     <string name="infoText">how to use this app</string>
     <string name="graphics">Graphics</string>
+    <string name="Update">Update</string>
     <string-array name="mode_set">
         <item>speed</item>
         <item>memory</item>

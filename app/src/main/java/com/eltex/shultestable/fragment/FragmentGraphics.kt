@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -40,6 +41,7 @@ class FragmentGraphics : Fragment() {
     private lateinit var graphTypeSpinner: Spinner
     private lateinit var graphValuesSpinner: Spinner
     private lateinit var lineGraphView: LineGraphView
+    private lateinit var refreshButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,8 +58,10 @@ class FragmentGraphics : Fragment() {
         graphTypeSpinner = binding.graphTypeSpinner
         graphValuesSpinner = binding.graphValuesSpinner
         lineGraphView = binding.lineGraphView
+        refreshButton = binding.refreshButton
 
         setupSpinners()
+        setupRefreshButton()
 
         loadGraphData()
     }
@@ -80,6 +84,12 @@ class FragmentGraphics : Fragment() {
             setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         }
         graphValuesSpinner.adapter = graphValuesAdapter
+    }
+
+    private fun setupRefreshButton() {
+        refreshButton.setOnClickListener {
+            loadGraphData()
+        }
     }
 
     private fun loadGraphData() {

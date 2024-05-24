@@ -2,10 +2,12 @@ package com.eltex.shultestable.utils
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.eltex.shultestable.R
 
 class LineGraphView @JvmOverloads constructor(
     context: Context,
@@ -17,44 +19,87 @@ class LineGraphView @JvmOverloads constructor(
     private var dataPoints: List<Pair<Float, Float>> = emptyList()
     private var maxX: Float = 0f
     private var maxY: Float = 0f
+    private var minX: Float = 0f
+    private var minY: Float = 0f
 
     init {
         paint.apply {
             color = ContextCompat.getColor(context, android.R.color.holo_orange_dark)
             strokeWidth = 14f
             isAntiAlias = true
+            textSize = 40f
         }
     }
 
     fun setData(data: List<Pair<Float, Float>>) {
         dataPoints = data
-        calculateMaxValues()
+        calculateMinMaxValues()
         invalidate()
     }
 
-    private fun calculateMaxValues() {
+    private fun calculateMinMaxValues() {
         maxX = dataPoints.maxByOrNull { it.first }?.first ?: 0f
         maxY = dataPoints.maxByOrNull { it.second }?.second ?: 0f
+        minX = dataPoints.minByOrNull { it.first }?.first ?: 0f
+        minY = dataPoints.minByOrNull { it.second }?.second ?: 0f
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         val width = width.toFloat()
         val height = height.toFloat()
+        val padding = 50f
 
-        paint.apply {
-            strokeWidth = 14f
-            color = ContextCompat.getColor(context, android.R.color.holo_orange_dark)
+
+        // Draw axes
+        paint.color = Color.BLACK
+        paint.strokeWidth = 5f
+
+        // X-axis
+        canvas.drawLine(padding, height - padding, width, height - padding, paint)
+
+        // Y-axis
+        canvas.drawLine(padding, 0f, padding, height - padding, paint)
+
+        // Draw data points and lines
+        paint.color = ContextCompat.getColor(context, android.R.color.holo_orange_dark)
+        paint.strokeWidth = 10f
+        paint.style = Paint.Style.FILL
+
+        for (i in 0 until dataPoints.size) {
+            val (x, y) = dataPoints[i]
+            val scaledX = padding + ((x - minX) / (maxX - minX)) * (width - 2 * padding)
+            val scaledY = (height - padding) - ((y - minY) / (maxY - minY)) * (height - 2 * padding)
+
+            // Draw point
+            canvas.drawCircle(scaledX, scaledY, 16f, paint)
+
+            // Draw line to next point
+            if (i < dataPoints.size - 1) {
+                val (nextX, nextY) = dataPoints[i + 1]
+                val nextScaledX = padding + ((nextX - minX) / (maxX - minX)) * (width - 2 * padding)
+                val nextScaledY = (height - padding) - ((nextY - minY) / (maxY - minY)) * (height - 2 * padding)
+                canvas.drawLine(scaledX, scaledY, nextScaledX, nextScaledY, paint)
+            }
         }
 
-        for (i in 0 until dataPoints.size - 1) {
-            val (x1, y1) = dataPoints[i]
-            val (x2, y2) = dataPoints[i + 1]
-            val scaledX1 = x1 / maxX * width
-            val scaledY1 = height - y1 / maxY * height
-            val scaledX2 = x2 / maxX * width
-            val scaledY2 = height - y2 / maxY * height
-            canvas.drawLine(scaledX1, scaledY1, scaledX2, scaledY2, paint)
+        // Draw labels on X-axis and Y-axis
+        paint.color = Color.BLACK
+        paint.textSize = 40f
+        paint.strokeWidth = 3f
+
+        // X-axis labels
+        for (i in 0..<dataPoints.size) {
+            val labelX = (minX + (i * (maxX - minX) / dataPoints.size)).toInt()
+            val x = padding + (i * (width - 2 * padding) / (dataPoints.size-1))
+            canvas.drawText(labelX.toString(), x, height - padding / 4, paint)
+        }
+
+        // Y-axis labels
+        for (i in 0..<dataPoints.size) {
+            val labelY = minY + (i * (maxY - minY) / dataPoints.size)
+            val y = (height - padding) - (i * (height - 2 * padding) / (dataPoints.size-1))
+            canvas.drawText(String.format("%.1f", labelY), padding / 0.9f, y, paint)
         }
     }
 }
