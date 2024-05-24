@@ -44,16 +44,17 @@ data class RecordEntity(
     val mistakes: String = "",
 ) {
     companion object {
-        fun fromGameRecord(gameRecord: GameRecord, modeId: Long, levelId: Long): RecordEntity = with(gameRecord) {
-            RecordEntity(
-                id = id,
-                numberTime = numberTime,
-                modeId = modeId,
-                levelId = levelId,
-                time = time,
-                mistakes = mistakes
-            )
-        }
+        fun fromGameRecord(gameRecord: GameRecord, modeId: Long, levelId: Long): RecordEntity =
+            with(gameRecord) {
+                RecordEntity(
+                    id = id,
+                    numberTime = numberTime,
+                    modeId = modeId,
+                    levelId = levelId,
+                    time = time,
+                    mistakes = mistakes
+                )
+            }
     }
 
     fun toGameRecord(mode: String, level: String): GameRecord =

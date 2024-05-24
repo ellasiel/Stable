@@ -7,12 +7,12 @@
     <fragment
         android:id="@+id/fragmentStatistic"
         android:name="com.eltex.shultestable.fragment.FragmentStatistic"
-        android:label="FragmentStatistic" >
-    <action
-        android:id="@+id/goToGraphics"
-        app:destination="@id/fragmentGraphics"
-        app:popUpTo="@id/fragmentStatistic" />
-</fragment>
+        android:label="FragmentStatistic">
+        <action
+            android:id="@+id/goToGraphics"
+            app:destination="@id/fragmentGraphics"
+            app:popUpTo="@id/fragmentStatistic" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentSpeed"
         android:name="com.eltex.shultestable.fragment.FragmentSpeed"
@@ -26,10 +26,10 @@
         android:id="@+id/fragmentMemory"
         android:name="com.eltex.shultestable.fragment.FragmentMemory"
         android:label="fragmentMemory">
-    <action
-        android:id="@+id/goToMemoryGame"
-        app:destination="@id/fragmentMemoryGame"
-        app:popUpTo="@id/fragmentMemory" />
+        <action
+            android:id="@+id/goToMemoryGame"
+            app:destination="@id/fragmentMemoryGame"
+            app:popUpTo="@id/fragmentMemory" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSpeedGame"

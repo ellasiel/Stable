@@ -41,7 +41,7 @@ class FragmentMemoryGame : Fragment() {
 
     private var newRecordId: Long = 0L
     private lateinit var numberTime: String
-    private var isClickable = false // Переменная для управления кликабельностью
+    private var isClickable = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,14 +69,12 @@ class FragmentMemoryGame : Fragment() {
         }
 
         viewModel.mistakes2Count.observe(viewLifecycleOwner) { count ->
-            // Обновляем отображение количества ошибок
             binding.mistakes2Count.text = count.toString()
         }
 
         viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
             if (shouldHide) {
                 hideNumbers()
-                // Включаем кликабельность квадратиков и стартуем таймер через 5 секунд после исчезновения цифр
                 enableClickAndStartTimerAfterDelay(0)
             }
         }
@@ -86,7 +84,7 @@ class FragmentMemoryGame : Fragment() {
         view?.postDelayed({
             isClickable = true
             binding.resultTime.base = SystemClock.elapsedRealtime()
-            binding.resultTime.start() // Запуск таймера
+            binding.resultTime.start()
         }, delayMillis)
     }
 
@@ -124,7 +122,7 @@ class FragmentMemoryGame : Fragment() {
                 )
                 allNumbers.remove(randomNumber)
                 numberTv.setOnClickListener {
-                    if (isClickable) { // Проверяем, кликабелен ли квадратик
+                    if (isClickable) {
                         val actualNumber = binding.currentNumber.text.toString().toInt()
                         if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
                             binding.resultTime.stop()

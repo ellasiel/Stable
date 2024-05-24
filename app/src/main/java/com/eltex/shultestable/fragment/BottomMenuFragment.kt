@@ -12,19 +12,15 @@ import androidx.navigation.ui.setupWithNavController
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentBottomMenuBinding
 import com.eltex.shultestable.db.AppDb
-import com.eltex.shultestable.model.GameRecord
 import com.eltex.shultestable.repository.RecordRepository
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.opencsv.CSVWriter
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileWriter
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 class BottomMenuFragment : Fragment() {
 
@@ -35,8 +31,6 @@ class BottomMenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentBottomMenuBinding.inflate(inflater, container, false)
-
-        // Инициализация репозитория
         val database = AppDb.getInstance(requireContext())
         recordRepository = SQLiteRecordRepository(database.recordDao)
 
@@ -49,7 +43,6 @@ class BottomMenuFragment : Fragment() {
         }
         val navController =
             requireNotNull(childFragmentManager.findFragmentById(R.id.container)).findNavController()
-        // Слушатель переключения вкладок
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.fragmentStatistic -> {
@@ -85,19 +78,16 @@ class BottomMenuFragment : Fragment() {
 
                 if (!recordsList.isNullOrEmpty()) {
                     val file = File(requireContext().getExternalFilesDir(null), "records.csv")
-
-                    // Проверяем существует ли файл
                     val fileExists = file.exists()
 
                     FileWriter(file, !fileExists).use { fileWriter ->
                         CSVWriter(fileWriter).use { csvWriter ->
-                            // Если файл не существует, записываем заголовок
                             val header =
                                 arrayOf("ID", "DateTime", "Mode", "Level", "Time", "Mistakes")
                             csvWriter.writeNext(
                                 header,
                                 false
-                            ) // Указываем false, чтобы не использовать кавычки
+                            )
 
                             for (record in recordsList) {
                                 val data = arrayOf(
@@ -111,7 +101,7 @@ class BottomMenuFragment : Fragment() {
                                 csvWriter.writeNext(
                                     data,
                                     false
-                                ) // Указываем false, чтобы не использовать кавычки
+                                )
                             }
                         }
                     }

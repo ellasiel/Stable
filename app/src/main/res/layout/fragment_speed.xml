@@ -34,9 +34,9 @@
         android:layout_width="196dp"
         android:layout_height="64dp"
         android:layout_marginTop="12dp"
+        android:clickable="false"
         android:text="@string/normal"
         android:textSize="24sp"
-        android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/easy_button" />
@@ -46,9 +46,9 @@
         android:layout_width="196dp"
         android:layout_height="64dp"
         android:layout_marginTop="12dp"
+        android:clickable="false"
         android:text="@string/hard"
         android:textSize="24sp"
-        android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/normal_button" />

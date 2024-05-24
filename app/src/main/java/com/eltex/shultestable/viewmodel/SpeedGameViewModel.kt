@@ -22,7 +22,6 @@ class SpeedGameViewModel(private val recordRepository: RecordRepository) : ViewM
                 if (number == currentValue && (number + 1) <= maxNumber) {
                     actualNumber.postValue(number + 1)
                 } else {
-                    // Увеличиваем счетчик ошибок при неправильном нажатии
                     mistakesCount.postValue(mistakesCount.value?.plus(1))
                 }
             }
@@ -42,10 +41,7 @@ class SpeedGameViewModel(private val recordRepository: RecordRepository) : ViewM
     }
 
     fun getLastRecordId(): Long {
-        // Выполните запрос к базе данных, чтобы получить последнюю запись
         val lastRecord = recordRepository.getLastRecord()
-
-        // Верните ID последней записи
         return lastRecord?.id ?: 0L
     }
 }

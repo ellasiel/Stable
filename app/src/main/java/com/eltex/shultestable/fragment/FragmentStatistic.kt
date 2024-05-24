@@ -18,9 +18,10 @@ import com.eltex.shultestable.db.AppDb
 import com.eltex.shultestable.itemdecoration.OffsetDecoration
 import com.eltex.shultestable.model.GameRecord
 import com.eltex.shultestable.repository.SQLiteRecordRepository
-import com.eltex.shultestable.viewmodel.RecordViewModel
+import com.eltex.shultestable.viewmodel.StatisticViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+
 class FragmentStatistic : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,10 +30,10 @@ class FragmentStatistic : Fragment() {
     ): View {
         super.onCreate(savedInstanceState)
         val binding = FragmentStatisticBinding.inflate(inflater, container, false)
-        val viewModel by viewModels<RecordViewModel> {
+        val viewModel by viewModels<StatisticViewModel> {
             viewModelFactory {
                 initializer {
-                    RecordViewModel(
+                    StatisticViewModel(
                         SQLiteRecordRepository(
                             AppDb.getInstance(requireContext().applicationContext).recordDao
                         )

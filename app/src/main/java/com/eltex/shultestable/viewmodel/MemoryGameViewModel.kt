@@ -25,7 +25,6 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
                 if (number == currentValue && (number + 1) <= maxNumber) {
                     currentNumber.postValue(number + 1)
                 } else {
-                    // Увеличиваем счетчик ошибок при неправильном нажатии
                     mistakes2Count.postValue(mistakes2Count.value?.plus(1))
                 }
             }
@@ -36,7 +35,7 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
         viewModelScope.launch(Dispatchers.IO) {
             currentNumber.postValue(1)
             shouldHideNumbers.postValue(false)
-            delay(5000) // Задержка в 5 секунд перед скрытием чисел
+            delay(5000)
             shouldHideNumbers.postValue(true)
         }
     }
@@ -48,10 +47,7 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
     }
 
     fun getLastRecordId(): Long {
-        // Выполните запрос к базе данных, чтобы получить последнюю запись
         val lastRecord = recordRepository.getLastRecord()
-
-        // Верните ID последней записи
         return lastRecord?.id ?: 0L
     }
 }

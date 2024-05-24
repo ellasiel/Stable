@@ -74,6 +74,7 @@ class ToolbarFragment : Fragment() {
                 .show()
         }
     }
+
     private fun exit() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(R.string.exit)

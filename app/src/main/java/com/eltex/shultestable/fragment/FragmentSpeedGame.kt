@@ -67,7 +67,6 @@ class FragmentSpeedGame : Fragment() {
         }
 
         viewModel.mistakesCount.observe(viewLifecycleOwner) { count ->
-            // Обновляем отображение количества ошибок
             binding.mistakesCount.text = count.toString()
         }
     }
@@ -151,5 +150,4 @@ class FragmentSpeedGame : Fragment() {
         }
         return result
     }
-
 }

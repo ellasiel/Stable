@@ -10,6 +10,7 @@ import com.eltex.shultestable.dao.RecordDao
 import com.eltex.shultestable.entity.LevelEntity
 import com.eltex.shultestable.entity.ModeEntity
 import com.eltex.shultestable.entity.RecordEntity
+
 @Database(
     entities = [RecordEntity::class, ModeEntity::class, LevelEntity::class],
     version = 2,
@@ -18,6 +19,7 @@ abstract class AppDb : RoomDatabase() {
     abstract val recordDao: RecordDao
     abstract fun modeDao(): ModeDao
     abstract fun levelDao(): LevelDao
+
     companion object {
         @Volatile
         private var INSTANCE: AppDb? = null
@@ -43,11 +45,9 @@ abstract class AppDb : RoomDatabase() {
             }
         }
 
-        // Метод для заполнения начальных данных
         private fun populateInitialData(database: AppDb) {
             val modeDao = database.modeDao()
             val levelDao = database.levelDao()
-            // Создание и вставка начальных данных в таблицу Mode
             val modes = listOf(
                 ModeEntity(name = "speed"),
                 ModeEntity(name = "memory")
