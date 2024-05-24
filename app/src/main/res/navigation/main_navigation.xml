@@ -8,6 +8,5 @@
         android:id="@+id/bottomMenuFragment"
         android:name="com.eltex.shultestable.fragment.BottomMenuFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_bottom_menu">
-    </fragment>
+        tools:layout="@layout/fragment_bottom_menu"></fragment>
 </navigation>
