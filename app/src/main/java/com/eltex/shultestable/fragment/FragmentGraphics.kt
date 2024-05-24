@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.fragment.findNavController
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentGraphicsBinding
 import com.eltex.shultestable.db.AppDb
@@ -42,6 +45,8 @@ class FragmentGraphics : Fragment() {
     private lateinit var graphValuesSpinner: Spinner
     private lateinit var lineGraphView: LineGraphView
     private lateinit var refreshButton: Button
+    private lateinit var backButton: ImageButton
+    private lateinit var bestResultTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,11 +64,15 @@ class FragmentGraphics : Fragment() {
         graphValuesSpinner = binding.graphValuesSpinner
         lineGraphView = binding.lineGraphView
         refreshButton = binding.refreshButton
+        backButton = binding.backButton
+        bestResultTextView = binding.bestResultTextView
 
         setupSpinners()
         setupRefreshButton()
+        setupBackButton()
 
         loadGraphData()
+        loadBestResult()
     }
 
     private fun setupSpinners() {
@@ -89,6 +98,13 @@ class FragmentGraphics : Fragment() {
     private fun setupRefreshButton() {
         refreshButton.setOnClickListener {
             loadGraphData()
+            loadBestResult()
+        }
+    }
+
+    private fun setupBackButton() {
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -102,6 +118,19 @@ class FragmentGraphics : Fragment() {
                     Pair(record.id.toFloat(), record.time.toFloat())
                 }
                 lineGraphView.setData(graphData)
+            }
+        }
+    }
+
+    private fun loadBestResult() {
+        lifecycleScope.launch {
+            viewModel.getBestResultByModeAndLevel(
+                graphTypeSpinner.selectedItem.toString(),
+                graphValuesSpinner.selectedItem.toString()
+            ).collect { bestRecord ->
+                bestResultTextView.text = bestRecord?.let {
+                    "Лучшее время: ${it.time}"
+                } ?: "Нет записей"
             }
         }
     }

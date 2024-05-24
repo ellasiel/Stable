@@ -31,6 +31,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/graphTypeSpinner" />
 
+    <TextView
+        android:id="@+id/bestResultTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/graphValuesSpinner" />
+
     <com.eltex.shultestable.utils.LineGraphView
         android:id="@+id/lineGraphView"
         android:layout_width="0dp"
@@ -42,7 +57,20 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/graphValuesSpinner" />
+        app:layout_constraintTop_toBottomOf="@id/bestResultTextView" />
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/rounded_button_background"
+        android:elevation="4dp"
+        android:src="@drawable/ic_back"
+        android:translationZ="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/refreshButton" />
 
     <Button
         android:id="@+id/refreshButton"
