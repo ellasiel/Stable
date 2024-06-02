@@ -93,7 +93,7 @@ class FragmentSpeedGame : Fragment() {
             columnCount = gameColumns
             rowCount = gameRows
         }
-        val allNumbers = fillNumbers(gameColumns * gameRows)
+        val allNumbers = viewModel.fillNumbers(gameColumns * gameRows)
 
         for (i in 0 until gameRows) {
             for (j in 0 until gameColumns) {
@@ -143,11 +143,5 @@ class FragmentSpeedGame : Fragment() {
         }
     }
 
-    private fun fillNumbers(number: Int): ArrayList<Int> {
-        val result = ArrayList<Int>()
-        for (index in 1..number) {
-            result.add(index)
-        }
-        return result
-    }
+
 }

@@ -1,5 +1,6 @@
 package com.eltex.shultestable.viewmodel
 
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -49,5 +50,13 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
     fun getLastRecordId(): Long {
         val lastRecord = recordRepository.getLastRecord()
         return lastRecord?.id ?: 0L
+    }
+
+    fun fillNumbers(number: Int): ArrayList<Int> {
+        val result = ArrayList<Int>()
+        for (index in 1..number) {
+            result.add(index)
+        }
+        return result
     }
 }

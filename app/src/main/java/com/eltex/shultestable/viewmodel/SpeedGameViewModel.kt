@@ -44,4 +44,11 @@ class SpeedGameViewModel(private val recordRepository: RecordRepository) : ViewM
         val lastRecord = recordRepository.getLastRecord()
         return lastRecord?.id ?: 0L
     }
+    fun fillNumbers(number: Int): ArrayList<Int> {
+        val result = ArrayList<Int>()
+        for (index in 1..number) {
+            result.add(index)
+        }
+        return result
+    }
 }
