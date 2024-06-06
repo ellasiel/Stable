@@ -6,13 +6,13 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.InfoCardBinding
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 
 class RecordsAdapter(
     private val listener: EventListener
-) : ListAdapter<GameRecord, RecordViewHolder>(RecordDiffCallback()) {
+) : ListAdapter<TrainRecord, RecordViewHolder>(RecordDiffCallback()) {
     interface EventListener {
-        fun onDeleteClicked(record: GameRecord)
+        fun onDeleteClicked(record: TrainRecord)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {

@@ -29,13 +29,13 @@ class FragmentMemory : Fragment() {
 
     private fun setupButtons() {
         binding.memoryEasyButton.setOnClickListener {
-            findNavController().navigate(FragmentMemoryDirections.goToMemoryGame("easy"))
+            findNavController().navigate(FragmentMemoryDirections.goToMemoryTrain("easy"))
         }
         binding.memoryNormalButton.setOnClickListener {
-            findNavController().navigate(FragmentMemoryDirections.goToMemoryGame("normal"))
+            findNavController().navigate(FragmentMemoryDirections.goToMemoryTrain("normal"))
         }
         binding.memoryHardButton.setOnClickListener {
-            findNavController().navigate(FragmentMemoryDirections.goToMemoryGame("hard"))
+            findNavController().navigate(FragmentMemoryDirections.goToMemoryTrain("hard"))
         }
     }
 

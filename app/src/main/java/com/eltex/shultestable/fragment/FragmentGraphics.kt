@@ -18,7 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.eltex.shultestable.R
 import com.eltex.shultestable.databinding.FragmentGraphicsBinding
 import com.eltex.shultestable.db.AppDb
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.utils.LineGraphView
 import com.eltex.shultestable.viewmodel.GraphicsViewModel
@@ -113,7 +113,7 @@ class FragmentGraphics : Fragment() {
             viewModel.getAllRecordsByModeAndLevel(
                 graphTypeSpinner.selectedItem.toString(),
                 graphValuesSpinner.selectedItem.toString()
-            ).collect { records: List<GameRecord> ->
+            ).collect { records: List<TrainRecord> ->
                 val graphData = records.map { record ->
                     Pair(record.id.toFloat(), record.time.toFloat())
                 }

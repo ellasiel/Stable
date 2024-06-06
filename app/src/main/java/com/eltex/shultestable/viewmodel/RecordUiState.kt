@@ -1,7 +1,7 @@
 package com.eltex.shultestable.viewmodel
 
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 
 data class RecordUiState(
-    val records: List<GameRecord> = emptyList(),
+    val records: List<TrainRecord> = emptyList(),
 )

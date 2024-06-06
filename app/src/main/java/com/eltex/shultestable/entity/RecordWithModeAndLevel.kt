@@ -2,7 +2,7 @@ package com.eltex.shultestable.entity
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 
 data class RecordWithModeAndLevel(
     @Embedded val record: RecordEntity,
@@ -19,6 +19,6 @@ data class RecordWithModeAndLevel(
     )
     val level: LevelEntity
 ) {
-    fun toGameRecord(): GameRecord =
+    fun toGameRecord(): TrainRecord =
         record.toGameRecord(mode.name, level.name)
 }

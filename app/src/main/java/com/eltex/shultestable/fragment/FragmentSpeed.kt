@@ -25,13 +25,13 @@ class FragmentSpeed : Fragment() {
 
     private fun setupButtons() {
         binding.easyButton.setOnClickListener {
-            findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("easy"))
+            findNavController().navigate(FragmentSpeedDirections.goToSpeedTrain("easy"))
         }
         binding.normalButton.setOnClickListener {
-            findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("normal"))
+            findNavController().navigate(FragmentSpeedDirections.goToSpeedTrain("normal"))
         }
         binding.hardButton.setOnClickListener {
-            findNavController().navigate(FragmentSpeedDirections.goToSpeedGame("hard"))
+            findNavController().navigate(FragmentSpeedDirections.goToSpeedTrain("hard"))
         }
     }
 

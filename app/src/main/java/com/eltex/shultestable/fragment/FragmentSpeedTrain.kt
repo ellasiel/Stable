@@ -17,20 +17,20 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.eltex.shultestable.R
-import com.eltex.shultestable.databinding.FragmentMemoryGameBinding
+import com.eltex.shultestable.databinding.FragmentSpeedTrainBinding
 import com.eltex.shultestable.db.AppDb
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 import com.eltex.shultestable.repository.SQLiteRecordRepository
 import com.eltex.shultestable.utils.DateTimeUtils
-import com.eltex.shultestable.viewmodel.MemoryGameViewModel
+import com.eltex.shultestable.viewmodel.SpeedTrainViewModel
 
-class FragmentMemoryGame : Fragment() {
-    private lateinit var binding: FragmentMemoryGameBinding
-    private val args: FragmentMemoryGameArgs by navArgs()
-    private val viewModel by viewModels<MemoryGameViewModel> {
+class FragmentSpeedTrain : Fragment() {
+    private lateinit var binding: FragmentSpeedTrainBinding
+    private val args: FragmentSpeedTrainArgs by navArgs()
+    private val viewModel by viewModels<SpeedTrainViewModel> {
         viewModelFactory {
             initializer {
-                MemoryGameViewModel(
+                SpeedTrainViewModel(
                     recordRepository = SQLiteRecordRepository(
                         AppDb.getInstance(requireContext().applicationContext).recordDao
                     )
@@ -41,14 +41,12 @@ class FragmentMemoryGame : Fragment() {
 
     private var newRecordId: Long = 0L
     private lateinit var numberTime: String
-    private var isClickable = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMemoryGameBinding.inflate(layoutInflater)
+        binding = FragmentSpeedTrainBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -64,28 +62,13 @@ class FragmentMemoryGame : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.currentNumber.observe(viewLifecycleOwner) { actualNumber ->
-            binding.currentNumber.text = actualNumber.toString()
+        viewModel.actualNumber.observe(viewLifecycleOwner) { actualNumber ->
+            binding.actualNumber.text = actualNumber.toString()
         }
 
-        viewModel.mistakes2Count.observe(viewLifecycleOwner) { count ->
-            binding.mistakes2Count.text = count.toString()
+        viewModel.mistakesCount.observe(viewLifecycleOwner) { count ->
+            binding.mistakesCount.text = count.toString()
         }
-
-        viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
-            if (shouldHide) {
-                hideNumbers()
-                enableClickAndStartTimerAfterDelay(0)
-            }
-        }
-    }
-
-    private fun enableClickAndStartTimerAfterDelay(delayMillis: Long) {
-        view?.postDelayed({
-            isClickable = true
-            binding.resultTime.base = SystemClock.elapsedRealtime()
-            binding.resultTime.start()
-        }, delayMillis)
     }
 
     private fun setupGameLevel(level: String) {
@@ -101,12 +84,12 @@ class FragmentMemoryGame : Fragment() {
             findNavController().popBackStack()
         }
         binding.endButton.setOnClickListener {
-            findNavController().navigate(FragmentMemoryGameDirections.memoryGameToMemory())
+            findNavController().navigate(FragmentSpeedTrainDirections.speedTrainToSpeed())
         }
     }
 
     private fun setupGameTable(gameColumns: Int, gameRows: Int) {
-        binding.memoryGameTable.apply {
+        binding.speedgameTable.apply {
             columnCount = gameColumns
             rowCount = gameRows
         }
@@ -116,48 +99,38 @@ class FragmentMemoryGame : Fragment() {
             for (j in 0 until gameColumns) {
                 val randomNumber = allNumbers.random()
                 val numberTv = createTextView(randomNumber)
-                binding.memoryGameTable.addView(
+                binding.speedgameTable.addView(
                     numberTv,
                     GridLayout.LayoutParams(GridLayout.spec(i, 1f), GridLayout.spec(j, 1f))
                 )
                 allNumbers.remove(randomNumber)
                 numberTv.setOnClickListener {
-                    if (isClickable) {
-                        val actualNumber = binding.currentNumber.text.toString().toInt()
-                        if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
-                            binding.resultTime.stop()
-                            viewModel.saveResultTime(
-                                GameRecord(
-                                    newRecordId,
-                                    numberTime,
-                                    mode = "memory",
-                                    args.level,
-                                    ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
-                                    mistakes = binding.mistakes2Count.text.toString()
-                                )
+                    val actualNumber = binding.actualNumber.text.toString().toInt()
+                    if (randomNumber == gameColumns * gameRows && randomNumber == actualNumber) {
+                        binding.resultTime.stop()
+                        viewModel.saveResultTime(
+                            TrainRecord(
+                                newRecordId,
+                                numberTime,
+                                mode = "speed",
+                                args.level,
+                                time = ((SystemClock.elapsedRealtime() - binding.resultTime.base) / 1000.0).toString(),
+                                mistakes = binding.mistakesCount.text.toString()
                             )
-                            showEndGame()
-                        }
-                        viewModel.checkNumber(randomNumber, gameColumns * gameRows)
+                        )
+                        showEndGame()
                     }
+                    viewModel.checkNumber(randomNumber, gameColumns * gameRows)
                 }
             }
         }
+        binding.resultTime.start()
     }
 
     private fun showEndGame() {
         binding.endButton.isVisible = true
         binding.resultView.isVisible = true
         binding.resultView.text = binding.resultTime.text
-    }
-
-    private fun hideNumbers() {
-        for (i in 0 until binding.memoryGameTable.childCount) {
-            val child = binding.memoryGameTable.getChildAt(i)
-            if (child is TextView) {
-                child.text = ""
-            }
-        }
     }
 
     private fun createTextView(number: Int): TextView {
@@ -167,12 +140,8 @@ class FragmentMemoryGame : Fragment() {
             textSize = 24f
             gravity = Gravity.CENTER
             setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-
-            viewModel.shouldHideNumbers.observe(viewLifecycleOwner) { shouldHide ->
-                if (shouldHide) {
-                    text = ""
-                }
-            }
         }
     }
+
+
 }

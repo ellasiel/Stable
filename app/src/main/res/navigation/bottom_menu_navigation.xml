@@ -18,8 +18,8 @@
         android:name="com.eltex.shultestable.fragment.FragmentSpeed"
         android:label="fragmentSpeed">
         <action
-            android:id="@+id/goToSpeedGame"
-            app:destination="@id/fragmentSpeedGame"
+            android:id="@+id/goToSpeedTrain"
+            app:destination="@id/fragmentSpeedTrain"
             app:popUpTo="@id/fragmentSpeed" />
     </fragment>
     <fragment
@@ -27,32 +27,32 @@
         android:name="com.eltex.shultestable.fragment.FragmentMemory"
         android:label="fragmentMemory">
         <action
-            android:id="@+id/goToMemoryGame"
-            app:destination="@id/fragmentMemoryGame"
+            android:id="@+id/goToMemoryTrain"
+            app:destination="@id/fragmentMemoryTrain"
             app:popUpTo="@id/fragmentMemory" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentSpeedGame"
-        android:name="com.eltex.shultestable.fragment.FragmentSpeedGame"
-        android:label="fragmentSpeedGame"
-        tools:layout="@layout/fragment_speed_game">
+        android:id="@+id/fragmentSpeedTrain"
+        android:name="com.eltex.shultestable.fragment.FragmentSpeedTrain"
+        android:label="fragmentSpeedTrain"
+        tools:layout="@layout/fragment_speed_train">
         <argument
             android:name="level"
             app:argType="string" />
         <action
-            android:id="@+id/speedGameToSpeed"
+            android:id="@+id/speedTrainToSpeed"
             app:destination="@id/fragmentSpeed" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentMemoryGame"
-        android:name="com.eltex.shultestable.fragment.FragmentMemoryGame"
-        android:label="fragmentMemoryGame"
-        tools:layout="@layout/fragment_memory_game">
+        android:id="@+id/fragmentMemoryTrain"
+        android:name="com.eltex.shultestable.fragment.FragmentMemoryTrain"
+        android:label="fragmentMemoryTrain"
+        tools:layout="@layout/fragment_memory_train">
         <argument
             android:name="level"
             app:argType="string" />
         <action
-            android:id="@+id/memoryGameToMemory"
+            android:id="@+id/memoryTrainToMemory"
             app:destination="@id/fragmentMemory" />
     </fragment>
     <fragment

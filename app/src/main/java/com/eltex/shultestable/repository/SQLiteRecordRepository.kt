@@ -2,20 +2,20 @@ package com.eltex.shultestable.repository
 
 import com.eltex.shultestable.dao.RecordDao
 import com.eltex.shultestable.entity.RecordEntity
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class SQLiteRecordRepository(private val dao: RecordDao) : RecordRepository {
 
-    override fun getRecords(): Flow<List<GameRecord>> = dao.getAll()
+    override fun getRecords(): Flow<List<TrainRecord>> = dao.getAll()
         .map { recordWithModeAndLevelList ->
             recordWithModeAndLevelList.map { recordWithModeAndLevel ->
                 recordWithModeAndLevel.toGameRecord()
             }
         }
 
-    override fun insert(record: GameRecord) {
+    override fun insert(record: TrainRecord) {
         val modeId = dao.getModeIdByName(record.mode)
             ?: throw IllegalArgumentException("Invalid mode: ${record.mode}")
         val levelId = dao.getLevelIdByName(record.level)
@@ -24,7 +24,7 @@ class SQLiteRecordRepository(private val dao: RecordDao) : RecordRepository {
         dao.insert(recordEntity)
     }
 
-    override fun getLastRecord(): GameRecord? {
+    override fun getLastRecord(): TrainRecord? {
         return dao.getLastRecord()?.toGameRecord()
     }
 
@@ -32,7 +32,7 @@ class SQLiteRecordRepository(private val dao: RecordDao) : RecordRepository {
         dao.deleteById(id)
     }
 
-    override fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<GameRecord>> {
+    override fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<TrainRecord>> {
         return dao.getAllRecordsByModeAndLevel(mode, level)
     }
 }

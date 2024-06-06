@@ -1,32 +1,28 @@
 package com.eltex.shultestable.viewmodel
 
-import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 import com.eltex.shultestable.repository.RecordRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MemoryGameViewModel(private val recordRepository: RecordRepository) : ViewModel() {
-    val currentNumber = MutableLiveData<Int>()
-    val mistakes2Count = MutableLiveData<Int>()
-    val shouldHideNumbers = MutableLiveData<Boolean>()
+class SpeedTrainViewModel(private val recordRepository: RecordRepository) : ViewModel() {
+    val actualNumber = MutableLiveData<Int>()
+    val mistakesCount = MutableLiveData<Int>()
 
     init {
-        mistakes2Count.value = 0
-        shouldHideNumbers.value = false
+        mistakesCount.value = 0
     }
 
     fun checkNumber(number: Int, maxNumber: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            currentNumber.value?.let { currentValue ->
+            actualNumber.value?.let { currentValue ->
                 if (number == currentValue && (number + 1) <= maxNumber) {
-                    currentNumber.postValue(number + 1)
+                    actualNumber.postValue(number + 1)
                 } else {
-                    mistakes2Count.postValue(mistakes2Count.value?.plus(1))
+                    mistakesCount.postValue(mistakesCount.value?.plus(1))
                 }
             }
         }
@@ -34,14 +30,11 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
 
     fun startGame() {
         viewModelScope.launch(Dispatchers.IO) {
-            currentNumber.postValue(1)
-            shouldHideNumbers.postValue(false)
-            delay(5000)
-            shouldHideNumbers.postValue(true)
+            actualNumber.postValue(1)
         }
     }
 
-    fun saveResultTime(model: GameRecord) {
+    fun saveResultTime(model: TrainRecord) {
         viewModelScope.launch(Dispatchers.IO) {
             recordRepository.insert(model)
         }
@@ -51,7 +44,6 @@ class MemoryGameViewModel(private val recordRepository: RecordRepository) : View
         val lastRecord = recordRepository.getLastRecord()
         return lastRecord?.id ?: 0L
     }
-
     fun fillNumbers(number: Int): ArrayList<Int> {
         val result = ArrayList<Int>()
         for (index in 1..number) {

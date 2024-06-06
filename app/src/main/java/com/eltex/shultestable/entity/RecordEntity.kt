@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 
 @Entity(
     tableName = "Records",
@@ -44,8 +44,8 @@ data class RecordEntity(
     val mistakes: String = "",
 ) {
     companion object {
-        fun fromGameRecord(gameRecord: GameRecord, modeId: Long, levelId: Long): RecordEntity =
-            with(gameRecord) {
+        fun fromGameRecord(trainRecord: TrainRecord, modeId: Long, levelId: Long): RecordEntity =
+            with(trainRecord) {
                 RecordEntity(
                     id = id,
                     numberTime = numberTime,
@@ -57,8 +57,8 @@ data class RecordEntity(
             }
     }
 
-    fun toGameRecord(mode: String, level: String): GameRecord =
-        GameRecord(
+    fun toGameRecord(mode: String, level: String): TrainRecord =
+        TrainRecord(
             id = id,
             numberTime = numberTime,
             mode = mode,

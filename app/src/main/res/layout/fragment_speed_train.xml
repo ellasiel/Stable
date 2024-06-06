@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backblue"
-    tools:context=".fragment.FragmentSpeedGame">
+    tools:context=".fragment.FragmentSpeedTrain">
 
     <ImageButton
         android:id="@+id/back_button"

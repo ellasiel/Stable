@@ -5,7 +5,7 @@ import androidx.room.Query
 import androidx.room.Upsert
 import com.eltex.shultestable.entity.RecordEntity
 import com.eltex.shultestable.entity.RecordWithModeAndLevel
-import com.eltex.shultestable.model.GameRecord
+import com.eltex.shultestable.model.TrainRecord
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -17,7 +17,7 @@ interface RecordDao {
     fun insert(record: RecordEntity): Long
 
     @Query("SELECT Records.*, Mode.name AS mode, Level.name AS level FROM Records INNER JOIN Mode ON Records.mode_id = Mode.id INNER JOIN Level ON Records.level_id = Level.id WHERE Mode.name = :mode AND Level.name = :level ORDER BY Records.id DESC LIMIT 10")
-    fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<GameRecord>>
+    fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<TrainRecord>>
 
     @Query("SELECT * FROM Records ORDER BY id DESC LIMIT 1")
     fun getLastRecord(): RecordWithModeAndLevel?
