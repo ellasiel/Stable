@@ -55,10 +55,10 @@ class FragmentSpeedTrain : Fragment() {
 
         newRecordId = viewModel.getLastRecordId() + 1L
         numberTime = DateTimeUtils.getCurrentDateTime()
-        setupGameLevel(args.level)
+        setupTrainLevel(args.level)
         setupButtons()
         setupObservers()
-        viewModel.startGame()
+        viewModel.startTrain()
     }
 
     private fun setupObservers() {
@@ -71,11 +71,11 @@ class FragmentSpeedTrain : Fragment() {
         }
     }
 
-    private fun setupGameLevel(level: String) {
+    private fun setupTrainLevel(level: String) {
         when (level) {
-            "easy" -> setupGameTable(3, 3)
-            "normal" -> setupGameTable(4, 4)
-            "hard" -> setupGameTable(5, 5)
+            "easy" -> setupTrainTable(3, 3)
+            "normal" -> setupTrainTable(4, 4)
+            "hard" -> setupTrainTable(5, 5)
         }
     }
 
@@ -88,8 +88,8 @@ class FragmentSpeedTrain : Fragment() {
         }
     }
 
-    private fun setupGameTable(gameColumns: Int, gameRows: Int) {
-        binding.speedgameTable.apply {
+    private fun setupTrainTable(gameColumns: Int, gameRows: Int) {
+        binding.speedTrainTable.apply {
             columnCount = gameColumns
             rowCount = gameRows
         }
@@ -99,7 +99,7 @@ class FragmentSpeedTrain : Fragment() {
             for (j in 0 until gameColumns) {
                 val randomNumber = allNumbers.random()
                 val numberTv = createTextView(randomNumber)
-                binding.speedgameTable.addView(
+                binding.speedTrainTable.addView(
                     numberTv,
                     GridLayout.LayoutParams(GridLayout.spec(i, 1f), GridLayout.spec(j, 1f))
                 )

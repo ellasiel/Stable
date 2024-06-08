@@ -59,18 +59,15 @@ class FragmentGraphics : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         graphTypeSpinner = binding.graphTypeSpinner
         graphValuesSpinner = binding.graphValuesSpinner
         lineGraphView = binding.lineGraphView
         refreshButton = binding.refreshButton
         backButton = binding.backButton
         bestResultTextView = binding.bestResultTextView
-
         setupSpinners()
         setupRefreshButton()
         setupBackButton()
-
         loadGraphData()
         loadBestResult()
     }

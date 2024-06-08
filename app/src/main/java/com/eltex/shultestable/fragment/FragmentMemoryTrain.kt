@@ -60,7 +60,7 @@ class FragmentMemoryTrain : Fragment() {
         setupGameLevel(args.level)
         setupButtons()
         setupObservers()
-        viewModel.startGame()
+        viewModel.startTrain()
     }
 
     private fun setupObservers() {

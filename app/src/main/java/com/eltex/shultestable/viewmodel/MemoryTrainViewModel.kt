@@ -31,7 +31,7 @@ class MemoryTrainViewModel(private val recordRepository: RecordRepository) : Vie
         }
     }
 
-    fun startGame() {
+    fun startTrain() {
         viewModelScope.launch(Dispatchers.IO) {
             currentNumber.postValue(1)
             shouldHideNumbers.postValue(false)

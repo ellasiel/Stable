@@ -28,7 +28,7 @@ class SpeedTrainViewModel(private val recordRepository: RecordRepository) : View
         }
     }
 
-    fun startGame() {
+    fun startTrain() {
         viewModelScope.launch(Dispatchers.IO) {
             actualNumber.postValue(1)
         }

@@ -11,7 +11,6 @@ class GraphicsViewModel(private val recordRepository: RecordRepository) : ViewMo
     fun getAllRecordsByModeAndLevel(mode: String, level: String): Flow<List<TrainRecord>> {
         return recordRepository.getAllRecordsByModeAndLevel(mode, level)
     }
-
     fun getBestResultByModeAndLevel(mode: String, level: String): Flow<TrainRecord?> {
         return recordRepository.getAllRecordsByModeAndLevel(mode, level)
             .map { records -> records.minByOrNull { it.time } }
