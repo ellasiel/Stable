@@ -76,9 +76,9 @@ class LineGraphView @JvmOverloads constructor(
         paint.textSize = 40f
         paint.strokeWidth = 3f
         for (i in 0..<dataPoints.size) {
-            val labelX = (minX + (i * (maxX - minX) / dataPoints.size)).toInt()
-            val x = padding + (i * (width - 2 * padding) / (dataPoints.size - 1))
-            canvas.drawText(labelX.toString(), x, height - padding / 4, paint)
+            val (x, _) = dataPoints[i]
+            val scaledX = padding + ((x - minX) / (maxX - minX)) * (width - 2 * padding)
+            canvas.drawText(x.toInt().toString(), scaledX, height - padding / 4, paint)
         }
         for (i in 0..<dataPoints.size) {
             val labelY = minY + (i * (maxY - minY) / dataPoints.size)
