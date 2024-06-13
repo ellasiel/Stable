@@ -40,7 +40,7 @@ abstract class AppDb : RoomDatabase() {
                     .build()
                 //context.deleteDatabase("app_db")
                 INSTANCE = appDb
-                //populateInitialData(appDb)
+                populateInitialData(appDb)
                 return appDb
             }
         }
